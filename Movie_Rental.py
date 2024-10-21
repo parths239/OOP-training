@@ -31,11 +31,15 @@ class customer:
     self.rented_movie = []
   
   def rent_movie(self, movie):
-    if movie.is_checked_out:
-      return f"The movie is already checked out"
-    else:
-      self.rented_movie.append(movie)
-      movie.check_out()
+    try:
+        if movie.is_checked_out:
+            raise Exception(f"The movie '{movie.title}' is already checked out")
+        else:
+            self.rented_movie.append(movie)
+            movie.check_out()
+    except Exception as e:
+        print(e)
+
   
   def return_movie(self, movie):
     if movie in self.rented_movie:
